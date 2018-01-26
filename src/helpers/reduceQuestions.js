@@ -2,7 +2,7 @@ export const reduceQuestions = td => {
     let allQuestions = td.reduce((result, item) => { 
         const { question, ...props } = item;
         const index = Object.keys(props)[0];
-        let question = '';
+        // let question = '';
         if (question) {
             
             result[index] = { 
