@@ -28,10 +28,6 @@ class Question extends Component {
       total_questions
     } = this.props;
     if (question_fetched) {
-      let questionText = '';
-      question.forEach(item => {
-        if (item.question) questionText += `${item[random_number]} `;
-      });
       return (
         <div className="question">
           <div>
@@ -41,7 +37,7 @@ class Question extends Component {
           </div>
           <div className="wrapper">
             <h2>Question #{random_number}</h2>
-            <div>{questionText}</div>
+            <div>{question}</div>
             <Answers />
           </div>
           <Handlers />
