@@ -9,7 +9,8 @@ export const reduceQuestions = td => {
         question: !result[index]
           ? props[index]
           : (result[index].question += ` ${props[index]}`),
-        answers: []
+        answers: [],
+        position: +index
       };
     } else {
       let answer = {

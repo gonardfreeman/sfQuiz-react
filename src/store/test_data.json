@@ -1608,15 +1608,14 @@
   },
   { "91": "Choose 3 answers", "question": true },
   { "91": "+A. It must be unique", "question": false },
-  { "91": "+?B. It is usually the name of your company.", "question": false },
+  { "91": "+B. It is usually the name of your company.", "question": false },
   {
-    "91":
-      "+C. It cannot be changed once it is registered to your organization.",
+    "91": "+C. It cannot be changed once it is registered to your organization.",
     "question": false
   },
   {
-    "91": "-D. It cannot be mapped to your company's domain.",
-    "question": true
+    "91": "D. It cannot be mapped to your company's domain.",
+    "question": false
   },
   {
     "92":

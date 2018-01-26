@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import inputActions from '../../actions/goToQuestionActions';
-import getQuestionAction from '../../actions/get_question';
-import generateActions from '../../actions/get_random_numbers';
+import getQuestionAction from '../../actions/getQuestion';
 import choser from '../../actions/choose_answer_actions';
 
 import '../../styles/GoToQuestion.css';
@@ -20,21 +19,17 @@ class GoToQuestion extends Component {
     }
   }
   goToQuestion() {
-    const genPromise = new Promise((resolve, reject) => {
-      const { inputData, generateRandomNumber } = this.props;
-      resolve(generateRandomNumber(+inputData));
-    });
-    genPromise.then(() => {
-      const {
-        getQuestionRequest,
-        random_number,
-        getQuestionSuccess,
-        clearAnswers
-      } = this.props;
-      clearAnswers();
-      getQuestionRequest(random_number);
-      getQuestionSuccess();
-    });
+    const { 
+      inputData,
+      clearAnswers,
+      getQuestion,
+      totalQuestions,
+    } = this.props;
+    if (+inputData > totalQuestions) {
+      return false;
+    }
+    getQuestion(inputData);
+    clearAnswers();
   }
   render() {
     const { goToQuestionInputAction, inputData } = this.props;
@@ -58,17 +53,16 @@ class GoToQuestion extends Component {
 }
 
 function mapStateToProps(state) {
-  const { random_number } = state.generateRandomNumber;
   const { inputData } = state.goToQuestionReducer;
+  const {totalQuestions} = state.fetchQuestion;
   return {
     inputData,
-    random_number
+    totalQuestions,
   };
 }
 
 export default connect(mapStateToProps, {
   ...inputActions,
   ...getQuestionAction,
-  ...generateActions,
   ...choser
 })(GoToQuestion);

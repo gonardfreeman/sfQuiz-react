@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import getQuestionAction from '../../actions/get_question';
-import generateActions from '../../actions/get_random_numbers';
+import {getRandomInt} from '../../helpers/premod';
+
+import getQuestionAction from '../../actions/getQuestion';
 import choser from '../../actions/choose_answer_actions';
 import answerChecker from '../../actions/checkAnswer';
 import questionCountActions from '../../actions/questionCountActions';
+import questionPullActions from '../../actions/questionPullActions';
 
 class Handlers extends Component {
   constructor(props) {
@@ -14,26 +16,21 @@ class Handlers extends Component {
     this.checkAnswer = this.checkAnswer.bind(this);
   }
   nextQuestion() {
-    const { generateRandomNumber } = this.props;
-
-    const genPromise = new Promise((resolve, reject) => {
-      resolve(generateRandomNumber());
-    });
-
-    genPromise.then(() => {
-      const {
-        getQuestionRequest,
-        random_number,
-        getQuestionSuccess,
-        clearAnswers,
-        increaseAnswerCountAction
-      } = this.props;
-      increaseAnswerCountAction();
-      getQuestionRequest(random_number);
-      getQuestionSuccess();
-      clearAnswers();
-    });
+    const { 
+      getQuestion,
+      clearAnswers,
+      increaseAnswerCountAction,
+      addQuestionToPull,
+      questionPull,
+      totalQuestions,
+    } = this.props;
+    const random_number = getRandomInt(totalQuestions, questionPull);
+    getQuestion(random_number);
+    addQuestionToPull(random_number);
+    increaseAnswerCountAction();
+    clearAnswers();
   }
+
   checkAnswer() {
     const {
       chosenAnswers,
@@ -42,7 +39,7 @@ class Handlers extends Component {
       asnwerIncorrectAction,
       rightAnswers,
       answers,
-      oneAttempt
+      oneAttempt,
     } = this.props;
     if (oneAttempt) {
       resetCheckerAction();
@@ -121,25 +118,26 @@ class Handlers extends Component {
 
 function mapStateToProps(state) {
   const { oneAttempt } = state.attemptReducer;
-  const { random_number } = state.generateRandomNumber;
   const { chosenAnswers } = state.chooseAnswer;
-  const { rightAnswers, answers } = state.fetchQuestion;
+  const { rightAnswers, answers, totalQuestions } = state.fetchQuestion;
   const { answerCorrect } = state.checkerReducer;
+  const {questionPull} = state.questionPullReducer;
 
   return {
-    random_number,
     oneAttempt,
     chosenAnswers,
     rightAnswers,
     answers,
-    answerCorrect
+    answerCorrect,
+    questionPull,
+    totalQuestions
   };
 }
 
 export default connect(mapStateToProps, {
   ...getQuestionAction,
-  ...generateActions,
   ...choser,
   ...answerChecker,
-  ...questionCountActions
+  ...questionCountActions,
+  ...questionPullActions
 })(Handlers);

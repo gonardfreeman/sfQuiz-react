@@ -1,7 +1,6 @@
 import {
-  GET_QUESTION_REQUEST,
-  GET_QUESTION_SUCCESS
-} from '../../actions/get_question';
+  GET_QUESTION,
+} from '../../actions/getQuestion';
 import { reduceQuestions, countAnswers } from '../../helpers/reduceQuestions';
 
 import * as td from '../test_data.json';
@@ -9,28 +8,31 @@ import * as td from '../test_data.json';
 const defaultState = {
   question: null,
   answers: null,
-  question_fetched: false,
-  regex: /^\+?-?\??/gm,
   rightAnswers: 0,
-  allQuestions: reduceQuestions(td)
+  allQuestions: reduceQuestions(td),
+  totalQuestions: reduceQuestions(td).length,
+  questionNumber: 0,
 };
 
 export default function fetchQuestion(state = defaultState, action) {
   switch (action.type) {
-    case GET_QUESTION_REQUEST:
-      const { random_number } = action;
-
+    case GET_QUESTION:
+      const { questionNumber } = action;
+      if (questionNumber === 0) {
+        return Object.assign({}, state, {
+          question: '',
+          answers: [],
+          rightAnswers: 3,
+          questionNumber: questionNumber
+        });
+      }
       return Object.assign({}, state, {
-        question: state.allQuestions[random_number - 1].question,
-        answers: state.allQuestions[random_number - 1].answers,
-        question_fetched: false,
+        question: state.allQuestions[questionNumber - 1].question,
+        answers: state.allQuestions[questionNumber - 1].answers,
         rightAnswers: countAnswers(
-          state.allQuestions[random_number - 1].answers
-        )
-      });
-    case GET_QUESTION_SUCCESS:
-      return Object.assign({}, state, {
-        question_fetched: true
+          state.allQuestions[questionNumber - 1].answers
+        ),
+        questionNumber: questionNumber
       });
     default:
       return state;

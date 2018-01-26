@@ -23,7 +23,7 @@ class Answers extends Component {
     }
   }
   render() {
-    const { answers, random_number, rightAnswers } = this.props;
+    const { answers, rightAnswers, questionNumber } = this.props;
 
     const answer = answers.map((item, index) => (
       <li key={index}>
@@ -35,7 +35,7 @@ class Answers extends Component {
             id={index}
             radiobuttonvalue={index}
           />
-          {item[random_number]}
+          {item[questionNumber]}
         </label>
       </li>
     ));
@@ -44,14 +44,13 @@ class Answers extends Component {
 }
 
 function mapStateToProps(state) {
-  const { answers, rightAnswers } = state.fetchQuestion;
-  const { random_number } = state.generateRandomNumber;
+  const { answers, rightAnswers, questionNumber } = state.fetchQuestion;
   const { chosenAnswers } = state.chooseAnswer;
   return {
     answers,
-    random_number,
     rightAnswers,
-    chosenAnswers
+    chosenAnswers,
+    questionNumber,
   };
 }
 

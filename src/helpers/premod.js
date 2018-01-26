@@ -1,7 +1,7 @@
-export function count_q(json) {
-  return +Object.keys(json[json.length - 1])[0];
-}
-
-export function getRandomInt(max) {
+export function getRandomInt(max, pull) {
+  let rand = Math.floor(Math.random() * Math.floor(max));
+  if (!~pull.indexOf(rand)) {
+    return rand;
+  }
   return Math.floor(Math.random() * Math.floor(max));
 }

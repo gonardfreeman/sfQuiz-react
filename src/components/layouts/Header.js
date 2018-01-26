@@ -7,20 +7,13 @@ import logo from '../../images/logo.svg';
 import '../../styles/App.css';
 import '../../styles/Lightspeed.css';
 
-import generateActions from '../../actions/get_random_numbers';
-
 class Header extends Component {
-  componentWillMount() {
-    const { generateRandomNumber, getTotalQuestions } = this.props;
-    generateRandomNumber();
-    getTotalQuestions();
-  }
   render() {
     return (
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">
-          Total questions {this.props.total_questions}
+          Total questions {this.props.totalQuestions}
         </h1>
       </header>
     );
@@ -28,11 +21,12 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  const { random_number, total_questions } = state.generateRandomNumber;
+  const {totalQuestions} = state.fetchQuestion;
+  const {questionPull} = state.questionPullReducer;
   return {
-    random_number,
-    total_questions
+    totalQuestions,
+    questionPull,
   };
 }
 
-export default connect(mapStateToProps, generateActions)(Header);
+export default connect(mapStateToProps)(Header);

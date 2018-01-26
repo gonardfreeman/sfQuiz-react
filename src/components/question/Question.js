@@ -7,65 +7,61 @@ import Handlers from '../handlers/Handlers';
 import ClearResults from '../handlers/ClearResults';
 import GoToQuestion from '../handlers/GoToQuestion';
 
-import getQuestionAction from '../../actions/get_question';
+import getQuestionAction from '../../actions/getQuestion';
+import questionPullActions from '../../actions/questionPullActions';
+
+import {getRandomInt} from '../../helpers/premod';
 
 import '../../styles/App.css';
 
 class Question extends Component {
   componentWillMount() {
-    const { random_number } = this.props;
-    const { getQuestionRequest, getQuestionSuccess } = this.props;
-    getQuestionRequest(random_number);
-    getQuestionSuccess();
+    const { getQuestion, totalQuestions, addQuestionToPull } = this.props;
+    const random = getRandomInt(totalQuestions, [])
+    getQuestion(random);
+    addQuestionToPull(random);
   }
   render() {
     const {
       question,
-      random_number,
-      question_fetched,
+      questionNumber,
       answerCount,
       correctAnswerCount,
-      total_questions
+      totalQuestions
     } = this.props;
-    if (question_fetched) {
-      return (
-        <div className="question">
-          <div>
-            Correct/Answered/Total: {correctAnswerCount}/{answerCount}/{
-              total_questions
-            }{' '}
-          </div>
-          <div className="wrapper">
-            <h2>Question #{random_number}</h2>
-            <div>{question}</div>
-            <Answers />
-          </div>
-          <Handlers />
-          <ClearResults />
-          <GoToQuestion />
-          <Attempts />
+    return (
+      <div className="question">
+        <div>
+          Correct/Answered/Total: {correctAnswerCount}/{answerCount}/{totalQuestions}
         </div>
-      );
-    } else {
-      return <h2>Loading...</h2>;
-    }
+        <div className="wrapper">
+          <h2>Question #{questionNumber}</h2>
+          <div>{question}</div>
+          <Answers />
+        </div>
+        <Handlers />
+        <ClearResults />
+        <GoToQuestion />
+        <Attempts />
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
-  const { random_number, total_questions } = state.generateRandomNumber;
-  const { question, question_fetched } = state.fetchQuestion;
+  const { question, question_fetched, totalQuestions, questionNumber } = state.fetchQuestion;
   const { correctAnswerCount, answerCount } = state.questionCountReducer;
   return {
-    random_number,
     question,
     question_fetched,
     correctAnswerCount,
     answerCount,
-    total_questions
+    totalQuestions,
+    questionNumber,
   };
 }
 
 export default connect(mapStateToProps, {
-  ...getQuestionAction
+  ...getQuestionAction,
+  ...questionPullActions
 })(Question);
