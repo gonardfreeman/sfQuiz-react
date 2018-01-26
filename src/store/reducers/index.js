@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   checkerReducer,
   attemptReducer,
   questionCountReducer,
-  goToQuestionReducer,
+  goToQuestionReducer
 });
 
 export default rootReducer;

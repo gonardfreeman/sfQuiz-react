@@ -11,10 +11,7 @@ import generateActions from '../../actions/get_random_numbers';
 
 class Header extends Component {
   componentWillMount() {
-    const {
-      generateRandomNumber,
-      getTotalQuestions
-    } = this.props;
+    const { generateRandomNumber, getTotalQuestions } = this.props;
     generateRandomNumber();
     getTotalQuestions();
   }

@@ -11,7 +11,7 @@ export default function configureStore() {
   const middlewares = [];
   middlewares.push(thunk);
   if (process.env.NODE_ENV === 'development') {
-    const {logger} = require('redux-logger');
+    const { logger } = require('redux-logger');
 
     middlewares.push(logger);
   }

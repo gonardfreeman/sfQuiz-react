@@ -8,7 +8,7 @@ import {
 
 const defaultState = {
   random_number: 0,
-  total_questions: 0,
+  total_questions: 0
 };
 
 export default function generateRandomNumber(state = defaultState, action) {

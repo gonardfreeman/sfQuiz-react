@@ -3,14 +3,18 @@
   flex-direction: column;
   margin: 10px 0;
   width: 300px;
-  max-width: 100%; }
-  .goToQuestion button {
-    margin: 10px 0; }
-  .goToQuestion label {
-    display: flex;
-    flex-direction: column-reverse;
-    text-decoration: underline;
-    text-align: left;
-    font-weight: bold; }
-    .goToQuestion label span {
-      margin-bottom: 5px; }
+  max-width: 100%;
+}
+.goToQuestion button {
+  margin: 10px 0;
+}
+.goToQuestion label {
+  display: flex;
+  flex-direction: column-reverse;
+  text-decoration: underline;
+  text-align: left;
+  font-weight: bold;
+}
+.goToQuestion label span {
+  margin-bottom: 5px;
+}

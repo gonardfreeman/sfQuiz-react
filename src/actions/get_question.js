@@ -7,7 +7,7 @@ export default {
   getQuestionRequest(random_number) {
     return {
       type: GET_QUESTION_REQUEST,
-      random_number,
+      random_number
     };
   },
   getQuestionSuccess() {
@@ -24,6 +24,6 @@ export default {
     return {
       type: LOAD_QUESTIONS_REQUEST,
       questions
-    }
+    };
   }
 };
