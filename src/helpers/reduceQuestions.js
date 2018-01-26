@@ -14,7 +14,7 @@ export const reduceQuestions = td => {
         };
         return result;
     },{});
-    console.log(allQuestions);
+    
     allQuestions = Array.from(allQuestions);
 
     return allQuestions.shift();
