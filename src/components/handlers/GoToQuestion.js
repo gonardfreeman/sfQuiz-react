@@ -40,13 +40,20 @@ class GoToQuestion extends Component {
             type="text"
             pattern="[0-9]*"
             placeholder="Enter number of question"
+            className="goToQuestion-input"
             onChange={goToQuestionInputAction}
             value={+inputData !== 0 ? inputData : ''}
             onKeyPress={this.goToQuestionEnter}
           />
           <span>Go to question</span>
         </label>
-        <button onClick={this.goToQuestion}>Go To Question</button>
+        <div className="button-block">
+          <button 
+          className="button go-to-question" 
+          onClick={this.goToQuestion}>
+            Go To Question
+          </button>
+        </div>
       </div>
     );
   }

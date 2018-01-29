@@ -20,15 +20,18 @@ class Handlers extends Component {
     const { 
       getQuestion,
       clearAnswers,
-      checkAnswer,
       addQuestionToPull,
       questionPull,
       totalQuestions,
+      skipQuestion,
+      oneAttempt,
     } = this.props;
     const random_number = getRandomInt(totalQuestions, questionPull);
     getQuestion(random_number);
     addQuestionToPull(random_number);
-    checkAnswer(false);
+    if (!oneAttempt) {
+      skipQuestion();
+    }
     clearAnswers();
   }
 
@@ -39,6 +42,7 @@ class Handlers extends Component {
       chosenAnswers,
       rightAnswers,
       answers,
+      skipQuestion,
     } = this.props;
     let correct = false;
     if (+rightAnswers === +chosenAnswers.length) {
@@ -51,27 +55,32 @@ class Handlers extends Component {
         return false;
       });
     }
-    correct ? alert('correct') : alert('wrong');
+    if (correct) {
+      checkAnswer(correct)
+      alert('correct')
+    } else {
+      alert('wrong');
+    }
+    
     if (oneAttempt) {
-      checkAnswer(correct);
+      skipQuestion();
       this.nextQuestion();
-      return;
     };
-    checkAnswer(correct);
   }
   render() {
     const { oneAttempt } = this.props;
     if (oneAttempt) {
       return (
         <div className="button-block">
-          <button onClick={this.checkAnswer}>Check answer and go next</button>
+          <button className="button-together"
+          onClick={this.checkAnswer}>Check answer and go next</button>
         </div>
       );
     }
     return (
       <div className="button-block">
-        <button onClick={this.checkAnswer}>Check answer</button>
-        <button onClick={this.nextQuestion}>Next question</button>
+        <button className="button" onClick={this.checkAnswer}>Check answer</button>
+        <button className="button" onClick={this.nextQuestion}>Next question</button>
       </div>
     );
   }

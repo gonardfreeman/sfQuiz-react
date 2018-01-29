@@ -15,9 +15,7 @@ class ClearResults extends Component {
   }
   render() {
     return (
-      <div className="clearResults">
-        <button onClick={this.clearResults}>Clear Progress</button>
-      </div>
+        <button className="button" onClick={this.clearResults}>Clear Progress</button>
     );
   }
 }

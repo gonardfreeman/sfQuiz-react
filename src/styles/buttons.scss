@@ -1,6 +1,17 @@
 .button-block {
     display: flex;
     margin-bottom: 10px;
+    .button, .button-together {
+        background: #222;
+        width: 8em;
+        height: 2em;
+        color: #61DAFB;
+        padding: 0;
+        border: 1px solid white;
+    }
+    .button-together {
+        width: 16em;
+    }
     button {
         margin-right: 5px;
     }

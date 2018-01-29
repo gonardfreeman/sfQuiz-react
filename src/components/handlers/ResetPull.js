@@ -14,9 +14,7 @@ class ResetPull extends Component {
     }
     render() {
         return (
-            <div>
-                <button onClick={this.resetPull}>Reset Pull</button>
-            </div>
+            <button className="button" onClick={this.resetPull}>Reset Pull</button>
         )
     }
 }

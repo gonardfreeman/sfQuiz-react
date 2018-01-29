@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Answers from './Answers';
-import Attempts from '../layouts/Attempts';
-import Handlers from '../handlers/Handlers';
-import ClearResults from '../handlers/ClearResults';
-import ResetPull from '../handlers/ResetPull';
-import GoToQuestion from '../handlers/GoToQuestion';
+import ControlBlock from './ControlBlock';
 
 import getQuestionAction from '../../actions/getQuestion';
 import questionPullActions from '../../actions/questionPullActions';
@@ -14,7 +10,6 @@ import questionPullActions from '../../actions/questionPullActions';
 import {getRandomInt} from '../../helpers/premod';
 
 import '../../styles/App.css';
-import '../../styles/buttons.css';
 
 class Question extends Component {
   componentWillMount() {
@@ -46,13 +41,7 @@ class Question extends Component {
           <div>{question}</div>
           <Answers />
         </div>
-        <Handlers />
-        <div className="button-block">
-          <ClearResults />
-          <ResetPull/>
-        </div>
-        <GoToQuestion />
-        <Attempts />
+        <ControlBlock/>
       </div>
     );
   }
