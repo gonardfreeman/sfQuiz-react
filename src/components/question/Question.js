@@ -5,6 +5,7 @@ import Answers from './Answers';
 import Attempts from '../layouts/Attempts';
 import Handlers from '../handlers/Handlers';
 import ClearResults from '../handlers/ClearResults';
+import ResetPull from '../handlers/ResetPull';
 import GoToQuestion from '../handlers/GoToQuestion';
 
 import getQuestionAction from '../../actions/getQuestion';
@@ -13,6 +14,7 @@ import questionPullActions from '../../actions/questionPullActions';
 import {getRandomInt} from '../../helpers/premod';
 
 import '../../styles/App.css';
+import '../../styles/buttons.css';
 
 class Question extends Component {
   componentWillMount() {
@@ -45,7 +47,10 @@ class Question extends Component {
           <Answers />
         </div>
         <Handlers />
-        <ClearResults />
+        <div className="button-block">
+          <ClearResults />
+          <ResetPull/>
+        </div>
         <GoToQuestion />
         <Attempts />
       </div>

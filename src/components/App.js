@@ -13,7 +13,8 @@ store.subscribe(
   throttle(() => {
     saveState({
       questionCountReducer: store.getState().questionCountReducer,
-      attemptReducer: store.getState().attemptReducer
+      attemptReducer: store.getState().attemptReducer,
+      questionPullReducer: store.getState().questionPullReducer,
     });
   }, 1000)
 );

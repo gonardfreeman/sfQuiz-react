@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import logo from '../../images/logo.svg';
 
 import '../../styles/App.css';
-import '../../styles/Lightspeed.css';
 
 class Header extends Component {
   render() {

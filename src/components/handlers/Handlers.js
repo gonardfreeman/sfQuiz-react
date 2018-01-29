@@ -8,6 +8,8 @@ import choser from '../../actions/choose_answer_actions';
 import answerChecker from '../../actions/checkAnswer';
 import questionPullActions from '../../actions/questionPullActions';
 
+import '../../styles/buttons.css';
+
 class Handlers extends Component {
   constructor(props) {
     super(props);

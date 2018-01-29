@@ -1,0 +1,5 @@
+.button-block {
+  display: flex;
+  margin-bottom: 10px; }
+  .button-block button {
+    margin-right: 5px; }
