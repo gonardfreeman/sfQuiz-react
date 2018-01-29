@@ -835,7 +835,7 @@
   { "47": "Choose 2 answers", "question": true },
   {
     "47":
-      "?A. Formula fields can be created by users who cannot author Apex code.",
+      "+A. Formula fields can be created by users who cannot author Apex code.",
     "question": false
   },
   {
@@ -849,11 +849,11 @@
   },
   {
     "47":
-      "+?D. Formula fields can be created and deployed using only a browser.",
+      "+D. Formula fields can be created and deployed using only a browser.",
     "question": false
   },
   {
-    "47": "?E. Formula fields can aggregate data from child records",
+    "47": "E. Formula fields can aggregate data from child records",
     "question": false
   },
   {
