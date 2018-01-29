@@ -1,8 +1,8 @@
 import {
-  INCREASE_CORRECT_COUNT,
-  INCREASE_ANSWER_COUNT,
-  CLEAR_RESULTS
-} from '../../actions/questionCountActions';
+  ANSWER_CORRECT,
+  ANSWER_INCORRECT,
+  CLEAR_RESULTS,
+} from '../../actions/checkAnswer';
 
 const defaultState = {
   correctAnswerCount: 0,
@@ -11,7 +11,7 @@ const defaultState = {
 
 export default function questionCountReducer(state = defaultState, action) {
   switch (action.type) {
-    case INCREASE_CORRECT_COUNT:
+    case ANSWER_CORRECT:
       return Object.assign({}, state, {
         correctAnswerCount: (state.correctAnswerCount += 1)
       });
@@ -20,7 +20,7 @@ export default function questionCountReducer(state = defaultState, action) {
         correctAnswerCount: 0,
         answerCount: 0
       });
-    case INCREASE_ANSWER_COUNT:
+    case ANSWER_INCORRECT:
       return Object.assign({}, state, {
         answerCount: (state.answerCount += 1)
       });

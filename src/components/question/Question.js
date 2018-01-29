@@ -16,8 +16,13 @@ import '../../styles/App.css';
 
 class Question extends Component {
   componentWillMount() {
-    const { getQuestion, totalQuestions, addQuestionToPull } = this.props;
-    const random = getRandomInt(totalQuestions, [])
+    const { 
+      getQuestion, 
+      totalQuestions, 
+      addQuestionToPull,
+      questionPull 
+    } = this.props;
+    const random = getRandomInt(totalQuestions, questionPull);
     getQuestion(random);
     addQuestionToPull(random);
   }
@@ -51,6 +56,7 @@ class Question extends Component {
 function mapStateToProps(state) {
   const { question, question_fetched, totalQuestions, questionNumber } = state.fetchQuestion;
   const { correctAnswerCount, answerCount } = state.questionCountReducer;
+  const {questionPull} = state.questionPullReducer;
   return {
     question,
     question_fetched,
@@ -58,6 +64,7 @@ function mapStateToProps(state) {
     answerCount,
     totalQuestions,
     questionNumber,
+    questionPull,
   };
 }
 

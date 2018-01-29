@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import countActions from '../../actions/questionCountActions';
+import countActions from '../../actions/checkAnswer';
 import '../../styles/ClearResults.css';
 
 class ClearResults extends Component {

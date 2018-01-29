@@ -23,7 +23,12 @@ class Answers extends Component {
     }
   }
   render() {
-    const { answers, rightAnswers, questionNumber } = this.props;
+    const { 
+      answers, 
+      rightAnswers, 
+      questionNumber, 
+      chosenAnswers 
+    } = this.props;
 
     const answer = answers.map((item, index) => (
       <li key={index}>
@@ -33,7 +38,7 @@ class Answers extends Component {
             name={rightAnswers > 1 ? `answer_${index}` : `radio_answer`}
             onChange={this.chooseAnswer}
             id={index}
-            radiobuttonvalue={index}
+            checked={~chosenAnswers.indexOf(index)}
           />
           {item[questionNumber]}
         </label>

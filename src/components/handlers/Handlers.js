@@ -6,7 +6,6 @@ import {getRandomInt} from '../../helpers/premod';
 import getQuestionAction from '../../actions/getQuestion';
 import choser from '../../actions/choose_answer_actions';
 import answerChecker from '../../actions/checkAnswer';
-import questionCountActions from '../../actions/questionCountActions';
 import questionPullActions from '../../actions/questionPullActions';
 
 class Handlers extends Component {
@@ -19,7 +18,7 @@ class Handlers extends Component {
     const { 
       getQuestion,
       clearAnswers,
-      increaseAnswerCountAction,
+      checkAnswer,
       addQuestionToPull,
       questionPull,
       totalQuestions,
@@ -27,76 +26,36 @@ class Handlers extends Component {
     const random_number = getRandomInt(totalQuestions, questionPull);
     getQuestion(random_number);
     addQuestionToPull(random_number);
-    increaseAnswerCountAction();
+    checkAnswer(false);
     clearAnswers();
   }
 
   checkAnswer() {
     const {
+      checkAnswer,
+      oneAttempt,
       chosenAnswers,
-      resetCheckerAction,
-      answerCorrectAction,
-      asnwerIncorrectAction,
       rightAnswers,
       answers,
-      oneAttempt,
     } = this.props;
-    if (oneAttempt) {
-      resetCheckerAction();
-      const correctPromise = new Promise((resolve, reject) => {
-        if (+rightAnswers === +chosenAnswers.length) {
-          chosenAnswers.every(chosenItem => {
-            if (!answers[chosenItem].rightAnswer) {
-              resolve(asnwerIncorrectAction());
-              return false;
-            }
-            resolve(answerCorrectAction());
-            return true;
-          });
-        } else {
-          resolve(asnwerIncorrectAction());
+    let correct = false;
+    if (+rightAnswers === +chosenAnswers.length) {
+      chosenAnswers.every(chosenItem => {
+        if (answers[chosenItem].rightAnswer) {
+          correct = true;
+          return true;
         }
-      });
-
-      correctPromise.then(() => {
-        const { answerCorrect, increaseCorrectCountAction } = this.props;
-
-        if (answerCorrect) {
-          increaseCorrectCountAction();
-          alert('correct');
-        } else {
-          alert('wrong');
-        }
-        this.nextQuestion();
-      });
-    } else {
-      resetCheckerAction();
-      const correctPromise = new Promise((resolve, reject) => {
-        if (+rightAnswers === +chosenAnswers.length) {
-          chosenAnswers.every(chosenItem => {
-            if (!answers[chosenItem].rightAnswer) {
-              resolve(asnwerIncorrectAction());
-              return false;
-            } else {
-              resolve(answerCorrectAction());
-              return true;
-            }
-          });
-        } else {
-          resolve(asnwerIncorrectAction());
-        }
-      });
-
-      correctPromise.then(() => {
-        const { answerCorrect, increaseCorrectCountAction } = this.props;
-        if (answerCorrect) {
-          increaseCorrectCountAction();
-          alert('correct');
-        } else {
-          alert('wrong');
-        }
+        correct = false;
+        return false;
       });
     }
+    correct ? alert('correct') : alert('wrong');
+    if (oneAttempt) {
+      checkAnswer(correct);
+      this.nextQuestion();
+      return;
+    };
+    checkAnswer(correct);
   }
   render() {
     const { oneAttempt } = this.props;
@@ -120,7 +79,6 @@ function mapStateToProps(state) {
   const { oneAttempt } = state.attemptReducer;
   const { chosenAnswers } = state.chooseAnswer;
   const { rightAnswers, answers, totalQuestions } = state.fetchQuestion;
-  const { answerCorrect } = state.checkerReducer;
   const {questionPull} = state.questionPullReducer;
 
   return {
@@ -128,7 +86,6 @@ function mapStateToProps(state) {
     chosenAnswers,
     rightAnswers,
     answers,
-    answerCorrect,
     questionPull,
     totalQuestions
   };
@@ -138,6 +95,5 @@ export default connect(mapStateToProps, {
   ...getQuestionAction,
   ...choser,
   ...answerChecker,
-  ...questionCountActions,
   ...questionPullActions
 })(Handlers);

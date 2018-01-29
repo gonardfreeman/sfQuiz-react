@@ -1860,8 +1860,8 @@
   { "105": "Choose 3 answers", "question": true },
   {
     "105":
-      "-?A. Encrypted fields are not available for validation rules or Apex scripts.",
-    "question": true
+      "A. Encrypted fields are not available for validation rules or Apex scripts.",
+    "question": false
   },
   {
     "105":
