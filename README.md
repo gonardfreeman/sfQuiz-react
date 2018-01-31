@@ -1,3 +1,16 @@
+# SFQUESTIONS
+This is salesforce quiz, here you can prepare to SF exam.
+
+## ADD QUESTIONS
+To add questions add them to `text_questions.txt` (NOTE: ITS VERY IMPORTANT TO FOLLOW PATTERN!). 
+Then run `test.py` and replace `test_data.json` in `sf_quiz/store`.
+
+### Structure of project
+in `sf_quiz` folder is standard create-react-app static web site.
+All questions are loaded threw webpack.
+`test.py` <--- this is parser.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
