@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import logo from '../../images/logo.svg';
@@ -19,12 +19,17 @@ class Header extends Component {
   }
 }
 
+Header.propTypes = {
+  totalQuestions: PropTypes.number,
+  questionPull: PropTypes.arrayOf(PropTypes.number)
+};
+
 function mapStateToProps(state) {
-  const {totalQuestions} = state.fetchQuestion;
-  const {questionPull} = state.questionPullReducer;
+  const { totalQuestions } = state.fetchQuestion;
+  const { questionPull } = state.questionPullReducer;
   return {
     totalQuestions,
-    questionPull,
+    questionPull
   };
 }
 

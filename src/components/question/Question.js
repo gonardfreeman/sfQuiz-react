@@ -7,17 +7,17 @@ import ControlBlock from './ControlBlock';
 import getQuestionAction from '../../actions/getQuestion';
 import questionPullActions from '../../actions/questionPullActions';
 
-import {getRandomInt} from '../../helpers/premod';
+import { getRandomInt } from '../../helpers/premod';
 
 import '../../styles/App.css';
 
 class Question extends Component {
   componentWillMount() {
-    const { 
-      getQuestion, 
-      totalQuestions, 
+    const {
+      getQuestion,
+      totalQuestions,
       addQuestionToPull,
-      questionPull 
+      questionPull
     } = this.props;
     const random = getRandomInt(totalQuestions, questionPull);
     getQuestion(random);
@@ -34,23 +34,30 @@ class Question extends Component {
     return (
       <div className="question">
         <div>
-          Correct/Answered/Total: {correctAnswerCount}/{answerCount}/{totalQuestions}
+          Correct/Answered/Total: {correctAnswerCount}/{answerCount}/{
+            totalQuestions
+          }
         </div>
         <div className="wrapper">
           <h2>Question #{questionNumber}</h2>
           <div>{question}</div>
           <Answers />
         </div>
-        <ControlBlock/>
+        <ControlBlock />
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { question, question_fetched, totalQuestions, questionNumber } = state.fetchQuestion;
+  const {
+    question,
+    question_fetched,
+    totalQuestions,
+    questionNumber
+  } = state.fetchQuestion;
   const { correctAnswerCount, answerCount } = state.questionCountReducer;
-  const {questionPull} = state.questionPullReducer;
+  const { questionPull } = state.questionPullReducer;
   return {
     question,
     question_fetched,
@@ -58,7 +65,7 @@ function mapStateToProps(state) {
     answerCount,
     totalQuestions,
     questionNumber,
-    questionPull,
+    questionPull
   };
 }
 

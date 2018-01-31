@@ -1,14 +1,19 @@
 .button-block {
   display: flex;
-  margin-bottom: 10px; }
-  .button-block .button, .button-block .button-together {
-    background: #222;
-    width: 8em;
-    height: 2em;
-    color: #61DAFB;
-    padding: 0;
-    border: 1px solid white; }
-  .button-block .button-together {
-    width: 16em; }
-  .button-block button {
-    margin-right: 5px; }
+  margin-bottom: 10px;
+}
+.button-block .button,
+.button-block .button-together {
+  background: #222;
+  width: 8em;
+  height: 2em;
+  color: #61dafb;
+  padding: 0;
+  border: 1px solid white;
+}
+.button-block .button-together {
+  width: 16em;
+}
+.button-block button {
+  margin-right: 5px;
+}

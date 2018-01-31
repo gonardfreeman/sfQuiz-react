@@ -14,7 +14,7 @@ store.subscribe(
     saveState({
       questionCountReducer: store.getState().questionCountReducer,
       attemptReducer: store.getState().attemptReducer,
-      questionPullReducer: store.getState().questionPullReducer,
+      questionPullReducer: store.getState().questionPullReducer
     });
   }, 1000)
 );

@@ -2,7 +2,7 @@ import {
   CHOOSE_ANSWER,
   UNCHOOSE_ANSWER,
   CLEAR_ANSWERS
-} from '../../actions/choose_answer_actions';
+} from '../../actions/chooseAnswerActions';
 
 const defaultState = {
   chosenAnswers: []

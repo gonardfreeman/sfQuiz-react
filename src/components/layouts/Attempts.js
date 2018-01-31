@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import attemptActions from '../../actions/atemptActions';
@@ -12,7 +13,6 @@ class Attempts extends Component {
   }
   changeAttempt() {
     const { oneAttempt, oneAttemptAction, manyAttemptsAction } = this.props;
-
     if (oneAttempt) {
       manyAttemptsAction();
     } else {
@@ -35,6 +35,12 @@ class Attempts extends Component {
     );
   }
 }
+
+Attempts.propTypes = {
+  oneAttempt: PropTypes.bool,
+  oneAttemptAction: PropTypes.func,
+  manyAttemptsAction: PropTypes.func
+};
 
 function mapStateToProps(state) {
   const { oneAttempt } = state.attemptReducer;

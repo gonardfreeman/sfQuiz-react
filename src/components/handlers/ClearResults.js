@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import countActions from '../../actions/checkAnswer';
@@ -15,10 +16,16 @@ class ClearResults extends Component {
   }
   render() {
     return (
-        <button className="button" onClick={this.clearResults}>Clear Progress</button>
+      <button className="button" onClick={this.clearResults}>
+        Clear Progress
+      </button>
     );
   }
 }
+
+ClearResults.propTypes = {
+  clearResultsAction: PropTypes.func
+};
 
 export default connect(null, {
   ...countActions

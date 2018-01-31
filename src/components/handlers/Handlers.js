@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import {getRandomInt} from '../../helpers/premod';
+import { getRandomInt } from '../../helpers/premod';
 
 import getQuestionAction from '../../actions/getQuestion';
-import choser from '../../actions/choose_answer_actions';
+import choser from '../../actions/chooseAnswerActions';
 import answerChecker from '../../actions/checkAnswer';
 import questionPullActions from '../../actions/questionPullActions';
 
@@ -17,14 +18,14 @@ class Handlers extends Component {
     this.checkAnswer = this.checkAnswer.bind(this);
   }
   nextQuestion() {
-    const { 
+    const {
       getQuestion,
       clearAnswers,
       addQuestionToPull,
       questionPull,
       totalQuestions,
       skipQuestion,
-      oneAttempt,
+      oneAttempt
     } = this.props;
     const random_number = getRandomInt(totalQuestions, questionPull);
     getQuestion(random_number);
@@ -42,7 +43,7 @@ class Handlers extends Component {
       chosenAnswers,
       rightAnswers,
       answers,
-      skipQuestion,
+      skipQuestion
     } = this.props;
     let correct = false;
     if (+rightAnswers === +chosenAnswers.length) {
@@ -56,41 +57,60 @@ class Handlers extends Component {
       });
     }
     if (correct) {
-      checkAnswer(correct)
-      alert('correct')
+      checkAnswer(correct);
+      alert('correct');
     } else {
       alert('wrong');
     }
-    
+
     if (oneAttempt) {
       skipQuestion();
       this.nextQuestion();
-    };
+    }
   }
   render() {
     const { oneAttempt } = this.props;
     if (oneAttempt) {
       return (
         <div className="button-block">
-          <button className="button-together"
-          onClick={this.checkAnswer}>Check answer and go next</button>
+          <button className="button-together" onClick={this.checkAnswer}>
+            Check answer and go next
+          </button>
         </div>
       );
     }
     return (
       <div className="button-block">
-        <button className="button" onClick={this.checkAnswer}>Check answer</button>
-        <button className="button" onClick={this.nextQuestion}>Next question</button>
+        <button className="button" onClick={this.checkAnswer}>
+          Check answer
+        </button>
+        <button className="button" onClick={this.nextQuestion}>
+          Next question
+        </button>
       </div>
     );
   }
 }
 
+Handlers.propTypes = {
+  oneAttempt: PropTypes.bool,
+  chosenAnswers: PropTypes.arrayOf(PropTypes.number),
+  rightAnswers: PropTypes.number,
+  answers: PropTypes.arrayOf(PropTypes.object),
+  totalQuestions: PropTypes.number,
+  questionPull: PropTypes.arrayOf(PropTypes.number),
+  getQuestion: PropTypes.func,
+  clearAnswers: PropTypes.func,
+  checkAnswer: PropTypes.func,
+  skipQuestion: PropTypes.func,
+  addQuestionToPull: PropTypes.func
+};
+
 function mapStateToProps(state) {
   const { oneAttempt } = state.attemptReducer;
   const { chosenAnswers } = state.chooseAnswer;
   const { rightAnswers, answers, totalQuestions } = state.fetchQuestion;
-  const {questionPull} = state.questionPullReducer;
+  const { questionPull } = state.questionPullReducer;
 
   return {
     oneAttempt,

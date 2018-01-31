@@ -6,7 +6,7 @@ export const SKIP_QUESTION = 'SKIP_QUESTION';
 export default {
   checkAnswer() {
     return {
-      type: ANSWER_CORRECT,
+      type: ANSWER_CORRECT
     };
   },
   clearResultsAction() {
@@ -17,6 +17,6 @@ export default {
   skipQuestion() {
     return {
       type: SKIP_QUESTION
-    }
+    };
   }
 };

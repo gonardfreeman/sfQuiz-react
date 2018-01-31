@@ -1,6 +1,4 @@
-import {
-  GET_QUESTION,
-} from '../../actions/getQuestion';
+import { GET_QUESTION } from '../../actions/getQuestion';
 import { reduceQuestions, countAnswers } from '../../helpers/reduceQuestions';
 
 import * as td from '../test_data.json';
@@ -11,7 +9,7 @@ const defaultState = {
   rightAnswers: 0,
   allQuestions: reduceQuestions(td),
   totalQuestions: reduceQuestions(td).length,
-  questionNumber: 0,
+  questionNumber: 0
 };
 
 export default function fetchQuestion(state = defaultState, action) {

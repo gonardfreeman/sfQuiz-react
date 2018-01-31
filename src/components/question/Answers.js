@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import choser from '../../actions/choose_answer_actions';
+import choser from '../../actions/chooseAnswerActions';
 
 import '../../styles/Answer.css';
 
@@ -23,12 +24,7 @@ class Answers extends Component {
     }
   }
   render() {
-    const { 
-      answers, 
-      rightAnswers, 
-      questionNumber, 
-      chosenAnswers 
-    } = this.props;
+    const { answers, rightAnswers, questionNumber, chosenAnswers } = this.props;
 
     const answer = answers.map((item, index) => (
       <li key={index}>
@@ -48,6 +44,16 @@ class Answers extends Component {
   }
 }
 
+Answers.propTypes = {
+  answers: PropTypes.arrayOf(PropTypes.object),
+  rightAnswers: PropTypes.number,
+  chosenAnswers: PropTypes.arrayOf(PropTypes.number),
+  questionNumber: PropTypes.number,
+  chooseAnswer: PropTypes.func,
+  unchooseAnswer: PropTypes.func,
+  clearAnswers: PropTypes.func
+};
+
 function mapStateToProps(state) {
   const { answers, rightAnswers, questionNumber } = state.fetchQuestion;
   const { chosenAnswers } = state.chooseAnswer;
@@ -55,7 +61,7 @@ function mapStateToProps(state) {
     answers,
     rightAnswers,
     chosenAnswers,
-    questionNumber,
+    questionNumber
   };
 }
 

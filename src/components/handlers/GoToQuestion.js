@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import inputActions from '../../actions/goToQuestionActions';
 import getQuestionAction from '../../actions/getQuestion';
-import choser from '../../actions/choose_answer_actions';
+import choser from '../../actions/chooseAnswerActions';
 
 import '../../styles/GoToQuestion.css';
 
@@ -19,12 +20,7 @@ class GoToQuestion extends Component {
     }
   }
   goToQuestion() {
-    const { 
-      inputData,
-      clearAnswers,
-      getQuestion,
-      totalQuestions,
-    } = this.props;
+    const { inputData, clearAnswers, getQuestion, totalQuestions } = this.props;
     if (+inputData > totalQuestions) {
       return false;
     }
@@ -32,7 +28,7 @@ class GoToQuestion extends Component {
     clearAnswers();
   }
   render() {
-    const { goToQuestionInputAction, inputData } = this.props;
+    const { validateAndGo, inputData } = this.props;
     return (
       <div className="goToQuestion">
         <label>
@@ -41,16 +37,14 @@ class GoToQuestion extends Component {
             pattern="[0-9]*"
             placeholder="Enter number of question"
             className="goToQuestion-input"
-            onChange={goToQuestionInputAction}
+            onChange={validateAndGo}
             value={+inputData !== 0 ? inputData : ''}
             onKeyPress={this.goToQuestionEnter}
           />
           <span>Go to question</span>
         </label>
         <div className="button-block">
-          <button 
-          className="button go-to-question" 
-          onClick={this.goToQuestion}>
+          <button className="button go-to-question" onClick={this.goToQuestion}>
             Go To Question
           </button>
         </div>
@@ -59,12 +53,20 @@ class GoToQuestion extends Component {
   }
 }
 
+GoToQuestion.propTypes = {
+  inputData: PropTypes.number,
+  totalQuestions: PropTypes.number,
+  getQuestion: PropTypes.func,
+  validateAndGo: PropTypes.func,
+  clearAnswers: PropTypes.func
+};
+
 function mapStateToProps(state) {
   const { inputData } = state.goToQuestionReducer;
-  const {totalQuestions} = state.fetchQuestion;
+  const { totalQuestions } = state.fetchQuestion;
   return {
     inputData,
-    totalQuestions,
+    totalQuestions
   };
 }
 

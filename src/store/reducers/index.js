@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   attemptReducer,
   questionCountReducer,
   goToQuestionReducer,
-  questionPullReducer,
+  questionPullReducer
 });
 
 export default rootReducer;

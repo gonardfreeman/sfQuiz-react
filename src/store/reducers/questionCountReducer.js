@@ -1,7 +1,7 @@
 import {
   ANSWER_CORRECT,
   CLEAR_RESULTS,
-  SKIP_QUESTION,
+  SKIP_QUESTION
 } from '../../actions/checkAnswer';
 
 const defaultState = {
@@ -23,7 +23,7 @@ export default function questionCountReducer(state = defaultState, action) {
     case SKIP_QUESTION:
       return Object.assign({}, state, {
         answerCount: (state.answerCount += 1)
-      })
+      });
     default:
       return state;
   }

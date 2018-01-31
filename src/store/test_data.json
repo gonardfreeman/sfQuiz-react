@@ -319,10 +319,10 @@
     "22": "C. It can provide success and error files in .csv format.",
     "question": false
   },
-  { "22": "+D. It can deduplicate records.", "question": false },
   {
-    "22": "   (+It can prevent the import of duplicate records.)",
-    "question": true
+    "22":
+      "+D. It can deduplicate records. (It can prevent the import of duplicate records.)",
+    "question": false
   },
   {
     "23":
@@ -1610,7 +1610,8 @@
   { "91": "+A. It must be unique", "question": false },
   { "91": "+B. It is usually the name of your company.", "question": false },
   {
-    "91": "+C. It cannot be changed once it is registered to your organization.",
+    "91":
+      "+C. It cannot be changed once it is registered to your organization.",
     "question": false
   },
   {

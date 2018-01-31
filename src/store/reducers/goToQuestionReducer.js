@@ -8,9 +8,7 @@ export default function goToQuestionReducer(state = defaultState, action) {
   switch (action.type) {
     case GO_TO_QUESTION_INPUT:
       return Object.assign({}, state, {
-        inputData: action.inp.target.validity.valid
-          ? +action.inp.target.value
-          : +state.inputData
+        inputData: action.inp
       });
     default:
       return state;
