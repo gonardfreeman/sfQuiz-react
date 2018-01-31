@@ -59,7 +59,11 @@ Question.propTypes = {
   question: PropTypes.string,
   correctAnswerCount: PropTypes.number,
   answerCount: PropTypes.number,
-  totalQuestions: PropTypes.number
+  totalQuestions: PropTypes.number,
+  questionNumber: PropTypes.number,
+  questionPull: PropTypes.arrayOf(PropTypes.number),
+  getQuestion: PropTypes.func,
+  addQuestionToPull: PropTypes.func
 };
 
 function mapStateToProps(state) {
