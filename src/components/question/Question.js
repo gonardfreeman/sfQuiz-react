@@ -37,7 +37,7 @@ class Question extends Component {
       <div className="question">
         <Helmet>
           <title
-          >{`Current Progress: ${correctAnswerCount}/${answerCount}/${totalQuestions} SF Quiz`}</title>
+          >{`Current Progress: ${correctAnswerCount}/${answerCount}/${totalQuestions} ----- SF Quiz`}</title>
         </Helmet>
         <div>
           Correct/Answered/Total: {correctAnswerCount}/{answerCount}/{
