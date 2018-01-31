@@ -6,10 +6,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers';
 import { loadState } from '../helpers/localStorage';
 
-export default function configureStore() {
+export default function configureStore(middleware) {
   const presistedState = loadState();
   const middlewares = [];
   middlewares.push(thunk);
+  middlewares.push(middleware);
   if (process.env.NODE_ENV === 'development') {
     const { logger } = require('redux-logger');
 

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { Helmet } from 'react-helmet';
+// import { Redirect } from 'react-router-dom';
 
 import Answers from './Answers';
 import ControlBlock from './ControlBlock';
@@ -19,11 +21,23 @@ class Question extends Component {
       getQuestion,
       totalQuestions,
       addQuestionToPull,
-      questionPull
+      questionPull,
+      match
     } = this.props;
-    const random = getRandomInt(totalQuestions, questionPull);
-    getQuestion(random);
-    addQuestionToPull(random);
+
+    if (match.path === '/questions/:id') {
+      //solve validation with id as string
+      //add redirect to random questions
+      //possible solution to move all willmount func to render method
+      //and rethink get question method
+      const { id } = match.params;
+      getQuestion(+id);
+      addQuestionToPull(+id);
+    } else {
+      const randomNumber = getRandomInt(totalQuestions, questionPull);
+      getQuestion(randomNumber);
+      addQuestionToPull(randomNumber);
+    }
   }
   render() {
     const {
