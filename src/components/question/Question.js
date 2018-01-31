@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import Answers from './Answers';
 import ControlBlock from './ControlBlock';
@@ -33,6 +35,10 @@ class Question extends Component {
     } = this.props;
     return (
       <div className="question">
+        <Helmet>
+          <title
+          >{`Current Progress: ${correctAnswerCount}/${answerCount}/${totalQuestions} SF Quiz`}</title>
+        </Helmet>
         <div>
           Correct/Answered/Total: {correctAnswerCount}/{answerCount}/{
             totalQuestions
@@ -49,18 +55,19 @@ class Question extends Component {
   }
 }
 
+Question.propTypes = {
+  question: PropTypes.string,
+  correctAnswerCount: PropTypes.number,
+  answerCount: PropTypes.number,
+  totalQuestions: PropTypes.number
+};
+
 function mapStateToProps(state) {
-  const {
-    question,
-    question_fetched,
-    totalQuestions,
-    questionNumber
-  } = state.fetchQuestion;
+  const { question, totalQuestions, questionNumber } = state.fetchQuestion;
   const { correctAnswerCount, answerCount } = state.questionCountReducer;
   const { questionPull } = state.questionPullReducer;
   return {
     question,
-    question_fetched,
     correctAnswerCount,
     answerCount,
     totalQuestions,
